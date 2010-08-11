@@ -10,6 +10,7 @@ class afRESTWSRequest
     private $parametersEncoded;
     private $resourceId;
     private $httpMethod;
+    private $baseUrl;
     
     function __construct($parameters, $resourceId, $httpMethod)
     {
@@ -17,6 +18,11 @@ class afRESTWSRequest
         $this->parametersEncoded = json_encode($parameters);
         $this->resourceId = $resourceId;
         $this->httpMethod = $httpMethod;
+    }
+
+    function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
     }
 
     function getParameters()
@@ -55,15 +61,9 @@ class afRESTWSRequest
         return $headers;
     }
 
-    function getBaseUrl()
-    {
-        return "";
-    }
-
     function getUrl()
     {
-        $baseUrl = $this->getBaseUrl();
-        $url = "{$baseUrl}{$this->resourceId}" . (substr(strrev($this->resourceId),0,1) != '/' ? '/' : '');
+        $url = "{$this->baseUrl}{$this->resourceId}" . (substr(strrev($this->resourceId),0,1) != '/' ? '/' : '');
         return $url;
     }
 
