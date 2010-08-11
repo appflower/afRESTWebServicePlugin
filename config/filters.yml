@@ -1,0 +1,6 @@
+rendering: ~
+security:  ~
+cache:     ~
+common:    ~
+execution:
+  class: afRESTWSExecutionFilter
