@@ -7,7 +7,7 @@
 class afRESTWSClient
 {
     /**
-     * @var afRestWSResponse
+     * @var afRESTWSResponse
      */
     private $lastResponse;
 
@@ -17,6 +17,10 @@ class afRESTWSClient
 
     function setBaseUrl($baseUrl)
     {
+        $urlReversed = strrev($baseUrl);
+        if ($urlReversed[0] != '/') {
+            $baseUrl .= '/';
+        }
         $this->baseUrl = $baseUrl;
     }
 

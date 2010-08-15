@@ -22,6 +22,10 @@ class afRESTWSRequest
 
     function setBaseUrl($baseUrl)
     {
+        $urlReversed = strrev($baseUrl);
+        if ($urlReversed[0] != '/') {
+            $baseUrl .= '/';
+        }
         $this->baseUrl = $baseUrl;
     }
 

@@ -6,7 +6,7 @@
  *
  * @author lukas
  */
-class afRestWSResponse
+class afRESTWSResponse
 {
     protected $status;
     protected $data;
@@ -16,7 +16,7 @@ class afRestWSResponse
     {
         $this->response = json_decode($responseText, true);
         if (!is_array($this->response)) {
-            throw new DynectSMBException('Could not decode response.');
+            throw new afRESTWSException('Could not decode response.');
         }
 
         $this->parseStatus();
@@ -33,7 +33,7 @@ class afRestWSResponse
         if (isset($this->response['success'])) {
             $this->status = (bool)$this->response['success'];
         } else {
-            throw new DynectSMBException('Could not determine response status.');
+            throw new afRESTWSException('Could not determine response status.');
         }
     }
 
