@@ -28,6 +28,12 @@ When something goes wrong You should throw afRESTWSException exception. It will 
 success = false
 message = EXCEPTION_MESSAGE
 
+You should also copy "500" error template: config/error/error.html.php to your application config/error dir.
+You should also create below action in default module to properly suport 404 errors:
+public function executeError404(sfWebRequest $request)
+{
+    throw new afRESTWSException('404 - Not found error');
+}
 
 
 2. HOW TO USE REST CLIENT

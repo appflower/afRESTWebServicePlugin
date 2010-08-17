@@ -7,7 +7,7 @@ class afRESTWSExecutionFilter extends sfExecutionFilter
     public function execute($filterChain) {
         try {
             parent::execute($filterChain);
-        } catch (Exception $e) {
+        } catch (afRESTWSException $e) {
             $this->injectErrorIntoResponse($e->getMessage());
         }
     }
