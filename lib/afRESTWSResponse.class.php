@@ -11,6 +11,7 @@ class afRESTWSResponse
     protected $status;
     protected $data;
     protected $response;
+    protected $message;
 
     function __construct($responseText)
     {
@@ -32,9 +33,17 @@ class afRESTWSResponse
     {
         if (isset($this->response['success'])) {
             $this->status = (bool)$this->response['success'];
+            if (isset($this->response['message'])) {
+                $this->message = $this->response['message'];
+            }
         } else {
             throw new afRESTWSException('Could not determine response status.');
         }
+    }
+
+    function getMessage()
+    {
+        return $this->message;
     }
 
     protected function parseData()
