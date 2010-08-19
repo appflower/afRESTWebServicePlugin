@@ -6,8 +6,8 @@
  */
 class afRESTWSRequest
 {
-    private $parameters;
-    private $parametersEncoded;
+    protected $parameters;
+    protected $parametersEncoded;
     private $resourceId;
     private $httpMethod;
     private $baseUrl;
@@ -15,9 +15,18 @@ class afRESTWSRequest
     function __construct($parameters, $resourceId, $httpMethod)
     {
         $this->parameters = $parameters;
-        $this->parametersEncoded = json_encode($parameters);
+        $this->parametersEncoded = $this->encodeParameters();
         $this->resourceId = $resourceId;
         $this->httpMethod = $httpMethod;
+    }
+
+    protected function encodeParameters()
+    {
+        $parts = array();
+        foreach($this->parameters as $key => $value) {
+            $parts[] = "$key=$value";
+        }
+        return join('&',$parts);
     }
 
     function setBaseUrl($baseUrl)
@@ -51,7 +60,7 @@ class afRESTWSRequest
 
     function getHeaders()
     {
-        $headers = array('Content-Type: application/json');
+        $headers = array();
 
         if ($this->httpMethod == 'PUT') {
             if (count($this->parameters) > 0) {
