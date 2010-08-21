@@ -15,6 +15,9 @@ class afRESTWSClient
 
     private $baseUrl;
 
+    private $httpAuthUsername;
+    private $httpAuthPassword;
+
     function setBaseUrl($baseUrl)
     {
         $urlReversed = strrev($baseUrl);
@@ -52,6 +55,10 @@ class afRESTWSClient
         if (count($parameters) > 0) {
             $this->logDev("Parameters:\n".print_r($parameters, true));
             curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getParametersEncoded());
+        }
+
+        if ($this->httpAuthUsername && $this->httpAuthPassword) {
+            curl_setopt($ch, CURLOPT_USERPWD, "{$this->httpAuthUsername}:{$this->httpAuthPassword}");
         }
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, $request->getHeaders());
@@ -105,6 +112,12 @@ class afRESTWSClient
     function getLastResponse()
     {
         return $this->lastResponse;
+    }
+
+    function setHttpAuthCredentials($username, $password)
+    {
+        $this->httpAuthUsername = $username;
+        $this->httpAuthPassword = $password;
     }
 }
 ?>
