@@ -45,7 +45,6 @@ class afRESTWSClient
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FAILONERROR, false);
         curl_setopt($ch, CURLOPT_HEADER, false);
 
 
@@ -66,6 +65,12 @@ class afRESTWSClient
         $this->logDev(date('Y-m-d H:i:s')." [$httpMethod] $url");
 
         $httpResult = curl_exec($ch);
+
+        $curlError = curl_error($ch);
+
+        if ($curlError != '') {
+            throw new afRESTWSException('Curl error occured: ' . $curlError);
+        }
 
         $httpResultDecoded = json_decode($httpResult, true);
         if (!$httpResultDecoded) {
