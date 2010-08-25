@@ -119,5 +119,16 @@ class afRESTWSClient
         $this->httpAuthUsername = $username;
         $this->httpAuthPassword = $password;
     }
+
+    function checkIfHostnameIsResolvable()
+    {
+        $hostname = parse_url($this->baseUrl, PHP_URL_HOST);
+        $ip = gethostbyname($hostname);
+        if ($ip == $hostname) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
 ?>
