@@ -120,6 +120,11 @@ class afRESTWSClient
         $this->httpAuthPassword = $password;
     }
 
+    /**
+     * Warning: this method is not supporting URL's using IP address
+     *
+     * @return <type>
+     */
     function checkIfHostnameIsResolvable()
     {
         $hostname = parse_url($this->baseUrl, PHP_URL_HOST);
