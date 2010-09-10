@@ -14,7 +14,7 @@ class afRESTWSRequest
     
     function __construct($parameters, $resourceId, $httpMethod)
     {
-        $this->parameters = $parameters;
+        $this->parameters = (array)$parameters;
         $this->parametersEncoded = $this->encodeParameters();
         $this->resourceId = $resourceId;
         $this->httpMethod = $httpMethod;
