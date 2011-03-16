@@ -54,7 +54,7 @@ class afRESTWSClient
         $parameters = $request->getParameters();
         if (count($parameters) > 0) {
             $this->logDev("Parameters:\n".print_r($parameters, true));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getParametersEncoded());
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
         }
 
         if ($this->httpAuthUsername && $this->httpAuthPassword) {
