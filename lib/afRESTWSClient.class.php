@@ -44,7 +44,11 @@ class afRESTWSClient
         return $request;
     }
 
-    function send(afRESTWSRequest $request)
+    /**
+     *
+     * @return afRESTWSResponse
+     */
+    function send(afRESTWSRequest $request, $dontTouchUrl = false)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
