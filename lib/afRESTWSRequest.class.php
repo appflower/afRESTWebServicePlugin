@@ -74,9 +74,10 @@ class afRESTWSRequest
         return $headers;
     }
 
-    function getUrl()
+    function getUrl($dontTouchUrl = false)
     {
-        $url = "{$this->baseUrl}{$this->resourceId}" . (substr(strrev($this->resourceId),0,1) != '/' ? '/' : '');
+        $url = "{$this->baseUrl}{$this->resourceId}";
+        $url .= ($dontTouchUrl ? '' : (substr(strrev($this->resourceId),0,1) != '/' ? '/' : ''));
         return $url;
     }
 

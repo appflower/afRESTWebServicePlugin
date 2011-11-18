@@ -70,7 +70,8 @@ class afRESTWSClient
         $httpMethod = $request->getHttpMethod();
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $httpMethod);
 
-        $url = $request->getUrl();
+        $url = $request->getUrl($dontTouchUrl);
+
         curl_setopt($ch, CURLOPT_URL, $url);
 
         $this->logDev(date('Y-m-d H:i:s')." [$httpMethod] $url");
